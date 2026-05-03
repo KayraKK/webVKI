@@ -1,0 +1,141 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <title>JavaScript задания 1-6</title>
+</head>
+<body>
+
+    <h1>JavaScript задания</h1>
+
+    <hr>
+
+    <h2>Задание 1. Работа с переменными</h2>
+    <p><strong>Условие:</strong> Объявите две переменные: admin и name. Запишите строку "Джон" в переменную name. Скопируйте значение из переменной name в admin. Выведите на экран значение admin.</p>
+    <button onclick="task1()">РЕЗУЛЬТАТ</button>
+    <p id="result1"></p>
+    <script>
+        function task1() {
+            let name = "Джон";
+            let admin = name;
+            document.getElementById("result1").innerHTML = "admin = " + admin;
+        }
+    </script>
+
+    <hr>
+
+    <h2>Задание 2. Исправьте сложение</h2>
+    <p><strong>Условие:</strong> Исправить код, чтобы сумма чисел была 3, а не "12".</p>
+    <button onclick="task2()">РЕЗУЛЬТАТ</button>
+    <p id="result2"></p>
+    <script>
+        function task2() {
+            let a = Number(prompt("Первое число?", 1));
+            let b = Number(prompt("Второе число?", 2));
+            let sum = a + b;
+            document.getElementById("result2").innerHTML = "Сумма чисел " + a + " + " + b + " = " + sum;
+        }
+    </script>
+
+    <hr>
+
+    <h2>Задание 3. Выведите чётные числа</h2>
+    <p><strong>Условие:</strong> При помощи цикла for выведите чётные числа от 2 до 10.</p>
+    <button onclick="task3()">РЕЗУЛЬТАТ</button>
+    <p id="result3"></p>
+    <script>
+        function task3() {
+            let numbers = [];
+            for (let i = 2; i <= 10; i += 2) {
+                numbers.push(i);
+            }
+            document.getElementById("result3").innerHTML = "Чётные числа от 2 до 10: " + numbers.join(", ");
+        }
+    </script>
+
+    <hr>
+
+    <h2>Задание 4. Замените for на while</h2>
+    <p><strong>Условие:</strong> Перепишите код, заменив цикл for на while.</p>
+    <button onclick="task4()">РЕЗУЛЬТАТ</button>
+    <p id="result4"></p>
+    <script>
+        function task4() {
+            let output = "";
+            let i = 0;
+            while (i < 3) {
+                output += "number " + i + "! ";
+                i++;
+            }
+            document.getElementById("result4").innerHTML = output;
+        }
+    </script>
+
+    <hr>
+
+    <h2>Задание 5. Повторять цикл, пока ввод неверен</h2>
+    <p><strong>Условие:</strong> Цикл спрашивает число больше 100. Если ввод неверный — повторять. Отмена — выход.</p>
+    <button onclick="task5()">РЕЗУЛЬТАТ</button>
+    <p id="result5"></p>
+    <script>
+        function task5() {
+            let number;
+            let attempts = [];
+            while (true) {
+                number = prompt("Введите число больше 100");
+                if (number === null) {
+                    document.getElementById("result5").innerHTML = "Вы отменили ввод. Попыток: " + (attempts.length > 0 ? attempts.join(", ") : "нет");
+                    break;
+                }
+                attempts.push(number);
+                if (Number(number) > 100) {
+                    document.getElementById("result5").innerHTML = "Верно! Число " + number + " больше 100.";
+                    break;
+                }
+                alert("Попробуйте ещё раз");
+            }
+        }
+    </script>
+
+    <hr>
+
+    <h2>Задание 6. Простые числа</h2>
+    <p><strong>Условие:</strong> Вывести все простые числа от 2 до n.</p>
+    <button onclick="task6()">РЕЗУЛЬТАТ (n=10)</button>
+    <button onclick="task6custom()">РЕЗУЛЬТАТ (своё n)</button>
+    <p id="result6"></p>
+    <script>
+        function showPrimes(n) {
+            let primes = [];
+            for (let i = 2; i <= n; i++) {
+                let isPrime = true;
+                for (let j = 2; j < i; j++) {
+                    if (i % j === 0) {
+                        isPrime = false;
+                        break;
+                    }
+                }
+                if (isPrime) {
+                    primes.push(i);
+                }
+            }
+            return primes;
+        }
+
+        function task6() {
+            let primes = showPrimes(10);
+            document.getElementById("result6").innerHTML = "Простые числа от 2 до 10: " + primes.join(", ");
+        }
+
+        function task6custom() {
+            let n = prompt("Введите n (число больше 1)", "20");
+            if (n !== null && Number(n) > 1) {
+                let primes = showPrimes(Number(n));
+                document.getElementById("result6").innerHTML = "Простые числа от 2 до " + n + ": " + primes.join(", ");
+            } else if (n !== null) {
+                document.getElementById("result6").innerHTML = "Ошибка: нужно ввести число больше 1";
+            }
+        }
+    </script>
+</body>
+</html>
