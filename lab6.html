@@ -1,0 +1,190 @@
+<html>
+    <head>
+        <meta charset="UTF-8">
+        <title>Лабы JS</title>
+    </head>
+    <body>
+        <h1>Лабы JS</h1>
+        
+        <h3>1.1. Вернуть число в обратном порядке (123 -> 321)</h3>
+        <button onclick="z1()">Запуск</button>
+        <p>Результат: <span id="res1"></span></p>
+        <script>
+            function z1() 
+            {
+                let input = prompt("Введите число:", "123");
+                let result = "";
+                for (let i = input.length - 1; i >= 0; i--) 
+                {
+                    result += input[i];
+                }
+                document.getElementById("res1").innerHTML = result;
+            }
+        </script>
+        
+        <h3>1.2. Вернуть число без повторяющихся цифр (111333456 -> 13456)</h3>
+        <button onclick="z2()">Запуск</button>
+        <p>Результат: <span id="res2"></span></p>
+        <script>
+            function z2() 
+            {
+                let input = prompt("Введите число:", "111333456");
+                let result = "";
+                for (let i = 0; i < input.length; i++) 
+                {
+                    let cd = input[i];
+                    let add = false;
+                    for (let j = 0; j < result.length; j++) 
+                    {
+                        if (result[j] === cd) 
+                        {
+                            add = true;
+                            break;
+                        }
+                    }
+                    if (!add) 
+                    {
+                        result += cd;
+                    }
+                }
+                document.getElementById("res2").innerHTML = result;
+            }
+        </script>
+
+        <h3>1.3. Посчитать, сколько раз в данном числе встречается данная цифра (1355567, 5 -> 3)</h3>
+        <button onclick="z3()">Запуск</button>
+        <p>Результат: <span id="res3"></span></p>
+        <script>
+            function z3() 
+            {
+                let n = prompt("Введите число:", "1355567");
+                let d = prompt("Введите цифру:", "5");
+                let count = 0;
+                for (let i = 0; i < n.length; i++) 
+                {
+                    if (n[i] === d[0]) 
+                    {
+                        count++;
+                    }
+                }
+                document.getElementById("res3").innerHTML = count;
+            }
+        </script>
+        
+        <h3>1.4. Посчитать самую длинную последовательность нулей/единиц в двоичной записи числа</h3>
+        <button onclick="z4()">Запуск</button>
+        <p>Двоичная запись числа: <span id="binaryView"></span></p>
+        <p>Самая длинная последовательность: <span id="res4"></span></p>
+        <script>
+            function z4() 
+            {
+                let input = prompt("Введите число:", "135");
+                let n = Number(input);
+                let binar = n.toString(2);
+                
+                document.getElementById("binaryView").innerHTML = binar;
+                
+                let maxQ = 1;
+                let cQ = 1;
+                
+                for (let i = 1; i < binar.length; i++) 
+                {
+                    if (binar[i] === binar[i - 1]) 
+                    {
+                        cQ++;
+                    } 
+                    else 
+                    {
+                        if (cQ > maxQ) 
+                        {
+                            maxQ = cQ;
+                        }
+                        cQ = 1;
+                    }
+                }
+                if (cQ > maxQ) 
+                {
+                    maxQ = cQ;
+                }
+                
+                document.getElementById("res4").innerHTML = maxQ;
+            }
+        </script>
+        
+        <h3>2.1. Найти самый первый неповторяющийся символ в строке ('фывфавыапрс' -> 'п')</h3>
+        <button onclick="z5()">Запуск</button>
+        <p>Результат: <span id="res5"></span></p>
+        <script>
+            function z5() 
+            {
+                let str = prompt("Введите строку:", "фывфавыапрс");
+                
+                for (let i = 0; i < str.length; i++)
+                {
+                    let char = str[i];
+                    let count = 0;
+                    for (let j = 0; j < str.length; j++) 
+                    {
+                        if (str[j] === char) 
+                        {
+                            count++;
+                        }
+                    }
+                    if (count === 1) 
+                    {
+                        document.getElementById("res5").innerHTML = char;
+                        return;
+                    }
+                }
+                document.getElementById("res5").innerHTML = "Нет";
+            }
+        </script>
+    
+        <h3>2.2. Сгенерировать строку заданной длины из случайных символов (англ буквы + цифры)</h3>
+        <button onclick="z6()">Запуск</button>
+        <p>Результат: <span id="res6"></span></p>
+        <script>
+            function z6() 
+            {
+                let length = prompt("Введите длину строки:", "5");
+                length = Number(length);
+                
+                let chars = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789";
+                let result = "";
+                
+                for (let i = 0; i < length; i++) 
+                {
+                    let index = Math.floor(Math.random() * chars.length);
+                    result += chars[index];
+                }
+                
+                document.getElementById("res6").innerHTML = result;
+            }
+        </script>
+        
+        <h3>2.3. Вернуть только уникальные символы строки ('позволяеткопироватьтекстиз' -> 'позвляеткираьс')</h3>
+        <button onclick="z7()">Запуск</button>
+        <p>Результат: <span id="res7"></span></p>
+        <script>
+            function z7() 
+            {
+                let str = prompt("Введите строку:", "позволяеткопироватьтекстиз");
+                
+                let result = "";
+                let seen = {};
+                
+                for (let i = 0; i < str.length; i++) 
+                {
+                    let char = str[i];
+                    if (!seen[char]) 
+                    {
+                        result += char;
+                        seen[char] = true;
+                    }
+                }
+                
+                document.getElementById("res7").innerHTML = result;
+            }
+        </script>
+    </body>
+</html>
